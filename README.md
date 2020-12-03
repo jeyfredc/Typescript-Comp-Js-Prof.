@@ -4,7 +4,7 @@
 
 [Introducción](#Introducción)
 
-[]()
+[Tipos básicos](#Tipos-básicos)
 
 []()
 
@@ -157,3 +157,204 @@ console.log(sum)
 Esto es lo que se obtiene en el navegador
 
 ![assets-git/4.png](assets-git/4.png)
+
+## Tipos básicos
+
+En el archivo `.gitignore`
+
+añadir lo siguiente para no subir cache al repositorio
+
+```
+node_modules
+.cache
+lib
+```
+
+**Tipos:**
+
+- **boolean.** Valor verdadero o falso.
+
+- **number.** Números.
+
+- **string.** Cadenas de texto.
+
+- **string[].** Arreglo del tipo cadena de texto.
+
+- **Array.** Arreglo multi-tipo, acepta cadenas de texto o números.
+
+- **enum.** Es un tipo especial llamado enumeración.
+
+- **any.** Cualquier tipo.
+
+- **object.** Del tipo objeto.
+
+
+Dentro del archivo **index.ts** ahora añadir lo siguiente 
+
+```
+// Boolean
+let muted = true;
+```
+
+Esto lo entiende el navegador pero si se quiere ser mas especifico se puede utilizar `: boolean` para especificar el tipado de la variable
+
+```
+// Boolean
+let muted: boolean = true;
+muted = false;
+```
+por ejemplo si se quisiera agregar una cadena de caracteres a muted inmediatamente va a salir un error 
+
+![assets-git/5.png](assets-git/5.png)
+
+Siguiente estan los numeros que de nuevo typescript lo entiende de esta forma
+
+```
+// numeros
+let numerador = 42;
+let denominador = 6;
+let resultado = numerador / denominador;
+```
+
+Pero si se quiere ser mas especifico se puede utilizar `: number` para especificar el tipado de la variable
+
+```
+// numeros
+let numerador: number = 42;
+let denominador: number = 6;
+let resultado: number = numerador / denominador;
+```
+
+por ejemplo si se quisiera guardar una variable que contenga un 6 pero entre cadena de caracter va a arrojar un error 
+
+![assets-git/6.png](assets-git/6.png)
+
+Siguiente estan los string que de nuevo typescript lo entiende de esta forma
+
+```
+// string
+let nombre : string = 'Jeyfred';
+let saludo = `Me llamo ${nombre}`;
+```
+
+Aunque saludo no esta especifico que es de tipo string typescript detecta que asi lo es y por tanto no arroja un error
+
+Siguiente estan los arreglos, en typescript se puede definir si quiere que el arreglo que sea de un tipo especifico o de varios, es decir que un arreglo contenga solo numeros o solo cadenas y tambien definir si se quiere de varios tipos, cadenas, numeros y booleanos
+
+```
+// Arreglos
+let people: string[] = [];
+people = ['Isabel', 'Nicole', 'Raul'];
+people.push('Roberto');
+```
+
+En este caso el arreglo es de strings pero si se intentara hacer push de un numero arrojaria un error 
+
+![assets-git/7.png](assets-git/7.png)
+
+Si se quiere un arreglo de string y numeros entonces se utiliza el keyword `Array` y entre `<>` se especifica el tipado, utilizando `|`
+
+```
+let peopleAndNumbers: Array< string | number > = [];
+peopleAndNumbers.push('Gonzalo');
+peopleAndNumbers.push('Ricardo');
+peopleAndNumbers.push('Federico');
+peopleAndNumbers.push(1000);
+peopleAndNumbers.push(20000);
+peopleAndNumbers.push(15000000);
+```
+
+Siguiente esta `enum` que son un conjunto de valores que son los que se definan, no se puede agregar ni quitar nada 
+
+```
+//enum
+enum Color {
+    Rojo,
+    Verde,
+    Azul,
+}
+```
+
+se utilizar la variable se asigna el tipo Color pero `Color.` esta obligado a utilizar uno de los 3 valores disponibles en Color
+
+![assets-git/8.png](assets-git/8.png)
+
+y si se agrega un `console.log` el resultado que se esperaria es el nombre del color
+
+```
+// enum
+enum Color {
+    Rojo,
+    Verde,
+    Azul,
+}
+
+let colorFavorito: Color = Color.Azul;
+
+console.log(`Mi color favorito es ${colorFavorito}`);
+```
+
+A continuacion lo que pasa es lo siguiente 
+
+![assets-git/9.png](assets-git/9.png)
+
+En la consola sale "Mi color favorito es 2"
+
+Lo que sucede es que cuando se hace una lista de enum a cada valor le va a asignar un numero
+
+es decir Rojo es 0, Verde es 1, Azul es 2, etc.
+
+Para poder ser explicito hay que asignar cada valor y si asigna al menos un valor el resto tambien se debe asignar
+
+```
+// enum
+enum Color {
+    Rojo = "Rojo",
+    Verde = "Verde",
+    Azul = "Azul",
+}
+
+let colorFavorito: Color = Color.Azul;
+
+console.log(`Mi color favorito es ${colorFavorito}`);
+```
+
+![assets-git/10.png](assets-git/10.png)
+
+En este caso ya sale "Mi color favorito es Azul"
+
+Siguiente esta `Any`, si se utiliza de la siguiente forma typescript va a arrojar un error
+
+```
+let comodin = 'Joker';
+comodin = { type: 'Wildcard'};
+```
+
+![assets-git/11.png](assets-git/11.png)
+
+En cambio si se utiliza el tipo `any` no va a salir ningun error, porque esto hace que la variable sea de cualquier tipo de dato
+
+```
+let comodin: any = 'Joker';
+comodin = { type: 'Wildcard'};
+```
+
+![assets-git/12.png](assets-git/12.png)
+
+Siguiente esta Object pero si se quiere ser mas especifico se puede utilizar `: object` para especificar el tipado de la variable
+
+```
+// Object
+
+let someObject = { type: 'Wilcard' };
+```
+
+Siendo especifico se escribiria de la siguiente forma
+
+```
+// Object
+
+let someObject : object = { type: 'Wilcard' };
+```
+
+typescript permite ser especifico con el tipo de variables pero existen otro tipos basicos que se pueden consultar en la [documentacion](https://www.typescriptlang.org/docs/handbook/basic-types.html)
