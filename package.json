@@ -1,0 +1,32 @@
+{
+  "name": "Curso-javascript-profesional",
+  "version": "1.0.0",
+  "description": "PlatziVideo",
+  "license": "MIT",
+  "author": "Jeyfred Calderon <jeyfredc@gmail.com>",
+  "keywords": [
+    "platzi"
+  ],
+  "scripts": {
+    "start": "parcel index.html ejercicios/index.html ejercicios/**/*.html"
+  },
+  "devDependencies": {
+    "parcel-bundler": "^1.12.4",
+    "typescript": "^4.1.2"
+  },
+  "browserslist": [
+    "last 1 chrome version"
+  ],
+  "main": "sw.js",
+  "dependencies": {
+    "node-forge": "^0.10.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jeyfredc/Typescript-Comp-Js-Prof..git"
+  },
+  "bugs": {
+    "url": "https://github.com/jeyfredc/Typescript-Comp-Js-Prof./issues"
+  },
+  "homepage": "https://github.com/jeyfredc/Typescript-Comp-Js-Prof.#readme"
+}
