@@ -6,7 +6,7 @@
 
 [Tipos básicos](#Tipos-básicos)
 
-[]()
+[Funciones](#Funciones)
 
 []()
 
@@ -358,3 +358,102 @@ let someObject : object = { type: 'Wilcard' };
 ```
 
 typescript permite ser especifico con el tipo de variables pero existen otro tipos basicos que se pueden consultar en la [documentacion](https://www.typescriptlang.org/docs/handbook/basic-types.html)
+
+## Funciones
+
+En Typescript podemos ser explícitos con el tipo de los argumentos y el tipo de retorno de una función.
+
+Abrir el archivo **index.ts** y a continuacion se va a realizar una funcion que suma numeros
+
+Esta funcion se pudiera escribir de la siguiente forma
+
+```
+// Funciones
+
+function add(a, b){
+    return a + b
+}
+
+const sum = add(4,6)
+```
+
+Pero con typescript es posible especificar el tipo de variable y de funcion de esta forma
+
+```
+// Funciones
+
+function add(a:number, b:number): number{
+    return a + b
+}
+
+const sum = add(4,6);
+```
+
+El hacer esto proporciona que el lenguaje proporcione ayudas como la de mostrar entre los parentesis donde se pone 4 y 6 que son de tipo numerico 
+
+![assets-git/13.png](assets-git/13.png)
+
+Hay veces que las funciones regresan otras funciones a continuacion se va a agregar una funcion que es creador de sumas
+
+```
+function createAdder(a: number){
+  return function(b: number){
+    return b+a
+  }
+}
+```
+
+Es posible ser mas especifico y decire a la funcion que tipo de valor es el que va a retornar. Como el valor de retorno es una funcion se anota de esta forma `:()=>`, se especifican los parametros y el tipo de valor de retorno
+
+```
+function createAdder(a:number): (number) => number {
+    return function (b:number){
+        return b + a;
+    }
+}
+
+const addFour = createAdder(4);
+const fourPlus6 = addFour(6);
+```
+
+No todos los parametros o argumentos son obligatorios, algunos son opcionales. Para esto una funcion que escribe el nombre completo 
+
+```
+function fullName(firstName: string, lastName: string): string {
+  return `${firstName} ${lastName}`;
+}
+
+const jeyfred = fullName('Jeyfred', 'Calderon');
+```
+
+hasta este momento la funcion no tiene ningun problema porque todo esta tal y como se esta pidiendo 
+
+![assets-git/14.png](assets-git/14.png)
+
+Al quitar un parametro en la constante se marca un error 
+
+![assets-git/15.png](assets-git/15.png)
+
+Para que el otro parametro sea opcional por ejemplo en lastName se agrega un signo de pregunta `?: tipo de dato`
+
+```
+function fullName(firstName: string, lastName?: string): string {
+  return `${firstName} ${lastName}`;
+}
+
+const jeyfred = fullName('Jeyfred');
+```
+
+De esta manera pasar un solo argumento en la funcion es valido
+
+![assets-git/16.png](assets-git/16.png)
+
+Si se quiere que no sea opcional, si no por omision delante de la palabra string se establece un argumento que se va a llamar por omision
+
+```
+function fullName(firstName: string, lastName: string = 'Smith'): string {
+  return `${firstName} ${lastName}`;
+}
+
+const jeyfred = fullName('Jeyfred');
+```
