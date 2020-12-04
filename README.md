@@ -8,7 +8,7 @@
 
 [Funciones](#Funciones)
 
-[]()
+[Interfaces](#Interfaces)
 
 []()
 
@@ -457,3 +457,142 @@ function fullName(firstName: string, lastName: string = 'Smith'): string {
 
 const jeyfred = fullName('Jeyfred');
 ```
+
+## Interfaces
+
+Nos permiten declarar la forma exacta de un objeto, definiendo los tipos de sus propiedades y si son opcionales o no.
+
+Realizar ejercicio en el archivo **index.ts**
+
+Para realizar una interface se escribe el keyword `interface` luego se asigna un nombre y se abren llaves `{}`, dentro de las llaves iran las propiedades
+
+Una interfaz se vuelve un tipo, es decir que se puede tipar una variable a la interfaz 
+
+```
+interface Rectangulo {
+    ancho: number
+    alto: number
+}
+
+let rect: Rectangulo = {
+    ancho: 4,
+    alto: 6,
+}
+```
+
+la variable debe estar completa respecto a su tipo, de lo contrario marcara un error, por ejemplo se comenta la propiedad de alto y la variable `rect` marca un error, pero tambien indica porque es el error
+
+![assets-git/17.png](assets-git/17.png)
+
+Tambien se puede hacer una funcion que reciba un parametro de tipo `Rectagulo` y acceder a la variable con  propiedad
+
+```
+interface Rectangulo {
+    ancho: number
+    alto: number
+}
+
+let rect: Rectangulo = {
+    ancho: 4,
+    alto: 6,
+}
+
+function area(r: Rectangulo): number {
+    return r.alto * r.ancho;
+}
+
+const areaRect = area(rect);
+console.log(areaRect);
+```
+
+![assets-git/18.png](assets-git/18.png)
+
+Tambien se pueden pasar argumentos opcionales por ejemplo interface Rectangulo va a recibir una propiedad mas, la cual va a ser `color` pero esta va a ser de tipo `enum`
+
+```
+enum Color {
+    Rojo = "Rojo",
+    Verde = "Verde",
+}
+
+interface Rectangulo {
+    ancho: number
+    alto: number
+    color: Color
+}
+
+let rect: Rectangulo = {
+    ancho: 4,
+    alto: 6,
+    color: Color.Rojo,
+}
+
+function area(r: Rectangulo): number {
+    return r.alto * r.ancho;
+}
+
+const areaRect = area(rect);
+console.log(areaRect);
+```
+
+Ahora `rect` se va a pasar el metodo `toString` y recibe una funcion
+
+```
+enum Color {
+    Rojo = "Rojo",
+    Verde = "Verde",
+}
+
+interface Rectangulo {
+    ancho: number
+    alto: number
+    color: Color
+}
+
+let rect: Rectangulo = {
+    ancho: 4,
+    alto: 6,
+    color: Color.Rojo,
+}
+
+function area(r: Rectangulo): number {
+    return r.alto * r.ancho;
+}
+
+const areaRect = area(rect);
+console.log(areaRect);
+
+rect.toString = function() {
+    return `Un rectangulo ${this.color}`;
+}
+```
+
+![assets-git/19.png](assets-git/19.png)
+
+pero tambien se puede pasar un argumento opcional en el caso que no exista un color utilizando `?`
+
+Al imprimir de esta forma se lee:
+
+Si tenemos un color entonces imprima esto `Un rectangulo ${this.color}`, si no imprima esto  `Un rectangulo`
+
+```
+rect.toString = function() {
+    return  this.color ? `Un rectangulo ${this.color}` : `Un rectangulo`;
+}
+```
+
+![assets-git/20.png](assets-git/20.png)
+
+Si se comenta la propiedad color en la interfaz entonces solo imprimira Un rectangulo y tambien para que sea opcional se coloca `?` delante de color
+
+```
+interface Rectangulo {
+    ancho: number
+    alto: number
+    color?: Color
+}
+```
+
+![assets-git/21.png](assets-git/21.png)
+
+las interfaces definen la forma exacta que debe tener un objeto, no se pueden añadir propiedades de mas o de menos, en caso que una propiedad sea opcional se debe marcar como opcional `?`

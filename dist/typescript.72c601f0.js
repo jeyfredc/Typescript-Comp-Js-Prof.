@@ -118,38 +118,31 @@ parcelRequire = (function (modules, cache, entry, globalName) {
 
   return newRequire;
 })({"ejercicios/typescript/index.ts":[function(require,module,exports) {
-// boolean
-var muted = true;
-muted = false; // numeros
-
-var numerador = 42;
-var denominador = 6;
-var resultado = numerador / denominador; // string
-
-var nombre = 'Jeyfred';
-var saludo = "Me llamo " + nombre; // Arreglos
-
-var people = [];
-people = ['Isabel', 'Nicole', 'Raul'];
-people.push('Roberto');
-var peopleAndNumbers = [];
-peopleAndNumbers.push('Gonzalo');
-peopleAndNumbers.push('Ricardo');
-peopleAndNumbers.push('Federico');
-peopleAndNumbers.push(1000);
-peopleAndNumbers.push(20000);
-peopleAndNumbers.push(15000000); // enum
-
+// Interfaces
 var Color;
 
 (function (Color) {
   Color["Rojo"] = "Rojo";
   Color["Verde"] = "Verde";
-  Color["Azul"] = "Azul";
 })(Color || (Color = {}));
 
-var colorFavorito = Color.Azul;
-console.log("Mi color favorito es " + colorFavorito);
+var rect = {
+  ancho: 4,
+  alto: 6
+};
+
+function area(r) {
+  return r.alto * r.ancho;
+}
+
+var areaRect = area(rect);
+console.log(areaRect);
+
+rect.toString = function () {
+  return this.color ? "Un rectangulo " + this.color : "Un rectangulo";
+};
+
+console.log(rect.toString());
 },{}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
@@ -178,7 +171,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "37139" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "40327" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
